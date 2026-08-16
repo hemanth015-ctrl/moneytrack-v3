@@ -1,1 +1,1 @@
-(()=>{const files=['/app1.js','/app2.js','/app3.js','/v10.js?v=10'];const load=i=>{if(i>=files.length)return;const s=document.createElement('script');s.src=files[i];s.onload=()=>load(i+1);s.onerror=()=>console.error('Failed to load',files[i]);document.body.appendChild(s)};load(0)})();
+(()=>{const files=['/app1.js','/app2.js','/app3.js','/v10.js?v=11'];const load=i=>{if(i>=files.length)return;const s=document.createElement('script');s.src=files[i];s.onload=()=>load(i+1);s.onerror=()=>console.error('Failed to load',files[i]);document.body.appendChild(s)};load(0)})();
