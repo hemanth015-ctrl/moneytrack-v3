@@ -1,0 +1,32 @@
+name: MoneyTrack Checks
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+jobs:
+  static-checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: JavaScript syntax checks
+        run: |
+          for f in core.js app.js app1.js app2.js app3.js v10.js v11.js v12.js v13.js v14.js v15.js v16.js v17.js v18.js v19.js v20-core.js v20.js; do
+            test -f "$f" && node --check "$f"
+          done
+      - name: Critical files present
+        run: |
+          test -f index.html
+          test -f manifest.webmanifest
+          test -f sw.js
+          grep -q "moneytrack-v3" core.js
+          grep -q "v20-core.js" app.js
+          grep -q "v20.js" app.js
+      - name: Liability invariant present
+        run: |
+          grep -q "emi" v20-core.js
+          grep -q "months" v20-core.js
+          grep -q "liabilityValue" v20-core.js
