@@ -14,7 +14,7 @@ jobs:
           node-version: '20'
       - name: JavaScript syntax checks
         run: |
-          for f in core.js app.js app1.js app2.js app3.js v10.js v11.js v12.js v13.js v14.js v15.js v16.js v17.js v18.js v19.js v20-core.js v20.js; do
+          for f in core.js app.js app1.js app2.js app3.js v10.js v11.js v12.js v13.js v14.js v15.js v16.js v17.js v18.js v19.js v20-core.js v20.js v20-welcome.js v21.js v22.js; do
             test -f "$f" && node --check "$f"
           done
       - name: Critical files present
@@ -24,9 +24,20 @@ jobs:
           test -f sw.js
           grep -q "moneytrack-v3" core.js
           grep -q "v20-core.js" app.js
-          grep -q "v20.js" app.js
+          grep -q "v21.js" app.js
+          grep -q "v22.js" app.js
       - name: Liability invariant present
         run: |
           grep -q "emi" v20-core.js
           grep -q "months" v20-core.js
           grep -q "liabilityValue" v20-core.js
+      - name: Gmail tracking rules present
+        run: |
+          grep -q "2026-08-01" v21.js
+          grep -qi "wallet" v21.js
+          grep -qi "upi" v21.js
+          grep -qi "credit" v21.js
+      - name: Category illustration present
+        run: |
+          grep -q "Spending by category" v22.js
+          grep -q "2026-08-01" v22.js
