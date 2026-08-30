@@ -14,7 +14,7 @@ jobs:
           node-version: '20'
       - name: JavaScript syntax checks
         run: |
-          for f in core.js app.js app1.js app2.js app3.js v10.js v11.js v12.js v13.js v14.js v15.js v16.js v17.js v18.js v19.js v20-core.js v20.js v20-welcome.js v21.js v22.js v23.js v24.js; do
+          for f in core.js app.js app1.js app2.js app3.js v10.js v11.js v12.js v13.js v14.js v15.js v16.js v17.js v18.js v19.js v20-core.js v20.js v20-welcome.js v21.js v22.js v23.js v24.js v25.js; do
             test -f "$f" && node --check "$f"
           done
       - name: Critical files present
@@ -28,6 +28,7 @@ jobs:
           grep -q "v22.js" app.js
           grep -q "v23.js" app.js
           grep -q "v24.js" app.js
+          grep -q "v25.js" app.js
       - name: Liability invariant present
         run: |
           grep -q "emi" v20-core.js
@@ -45,3 +46,8 @@ jobs:
           grep -q "hSpend" v24.js
           grep -q "v22Bars" v24.js
           grep -q "chart" v24.js
+      - name: Current-month category drilldown present
+        run: |
+          grep -q "startsWith(mon())" v25.js
+          grep -q "v25CatSheet" v25.js
+          grep -q "Current month Gmail spends" v25.js
